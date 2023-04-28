@@ -2,6 +2,7 @@ package ca.sheridancollege.ramchrav.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,18 @@ public class RewardController {
 			return reward.get();
 		}
 		return null;
+	}
+	
+	/**
+	 * 
+	 * @return a random reward from the reward table
+	 */
+	@GetMapping("/getRandom")
+	public Rewards getRandom() {
+		Random rand = new Random(); 
+		int randName = rand.nextInt(rewardsRepo.findAll().size());
+		//System.out.println(rewardsRepo.findAll().get(randName));
+		return rewardsRepo.findAll().get(randName); 
 	}
 
 	/**
